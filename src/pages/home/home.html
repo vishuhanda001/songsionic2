@@ -1,0 +1,35 @@
+<div class="loadingdata" *ngIf="!pageLoaded">
+  <img src="../../assets/song.png" alt="">
+  <p>Loading...</p>
+</div>
+    <div class="nav">
+        <i class="material-icons">arrow_back</i>
+
+        <div class="search">
+            <input type="text" placeholder="Search">
+
+        </div>
+    </div>
+    <div class="empty"></div>
+
+    <div class="songs">
+        <div class="cards" *ngFor="let songinfo of songinfos" >
+            <img [src]="'https://freemusicarchive.org/file/'+songinfo.album_image_file" alt="">
+            <div class="songtitle">
+                <p>{{songinfo.track_title}}</p>
+                <i class="material-icons" (click)="play(songinfo)" >play_arrow</i>
+                <!-- <i class="material-icons">pause</i> -->
+               <a [href]="'https://freemusicarchive.org/file/'+songinfo.track_file" download><i class="material-icons">file_download</i></a>
+            </div>
+        </div>
+        
+    </div>
+    <div class="footer">
+        <p>{{currentPlayingTrackName}}</p>
+      <p>{{audiocurrenttime}} / {{audioduration}}</p>
+      <audio src="{{songTrack}}" autoplay=true class="song"></audio>
+        <i class="material-icons" (click)="playPrev()">skip_previous</i>
+        <i class="material-icons" (click)="onPlay()" *ngIf="!isPlaying">play_circle_filled</i>
+        <i class="material-icons" (click)="onPause()" *ngIf="isPlaying">pause_circle_outline</i>
+        <i class="material-icons" (click)="playNext()">skip_next</i>
+    </div>
